@@ -12,12 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
+Investment.belongsTo(models.Portfolio,{
+  foreignKey:"portfolioId",
+  as:"portfolio"
+})
       /*
          Expense.associate = models => {
-    Expense.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user',
-    });
+          Expense.belongsTo(models.User, {
+            foreignKey: 'userId',
+            as: 'user',
+          });
 
     Expense.belongsTo(models.Category, {
       foreignKey: 'categoryId',
@@ -27,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       */
     }
   }
-  Expense.init({
+  Investment.init({
    investmentId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -35,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     type: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false,p
       },
     name: {
         type: DataTypes.STRING,

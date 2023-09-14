@@ -5,6 +5,9 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
+
+  
+
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,16 +15,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-       /* Category.associate = models => {
-        Category.belongsTo(models.User, {
-          foreignKey: 'userId',
-          as: 'user',
-        });
-    
-        Category.hasMany(models.Expense, {
-          foreignKey: 'categoryId',
-        });
-      };*/
+      Portfolio.hasMany(models.Investment,{
+        foreignKey: 'portfolioId' , as: 'investment'
+      })
     }
   }
   Portfolio.init({
