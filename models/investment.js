@@ -28,42 +28,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Expense.init({
-   expenseId: {
+   investmentId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-    description: {
+    type: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      amount: {
-        type: DataTypes.DECIMAL(10, 2),
+    name: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      quantity: {
+        type: DataTypes.FLOAT,
       },
-      userId: {
+    value: {
+        type: DataTypes.FLOAT,
+      },
+    portfolioId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'Users', // name of your model, it should be the exact name of your model file
-          key: 'userId', // name of the id field in your model
-        },
-        allowNull: false,
-      },
-      categoryId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Categories', // name of your model, it should be the exact name of your model file
-          key: 'categoryId', // name of the id field in your model
+          model: 'Portfolio', // name of your model, it should be the exact name of your model file
+          key: 'portfolioId', // name of the id field in your model
         },
         allowNull: true, // assuming a category is optional and an expense can exist without a category
       },
   }, {
     sequelize,
-    modelName: 'Expense',
+    modelName: 'Investment',
   });
-  return Expense;
+  return Investment;
 };

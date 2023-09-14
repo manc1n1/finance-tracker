@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       };*/
     }
   }
-  Category.init({
-    categoryId: {
+  Portfolio.init({
+    portfolioId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -38,14 +38,14 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'Users', // name of your model, it should be the exact name of your model file
+          model: 'User', // name of your model, it should be the exact name of your model file
           key: 'userId', // name of the id field in your model
         },
         allowNull: false,
       },
   }, {
     sequelize,
-    modelName: 'Category',
+    modelName: 'Portfolio',
   });
-  return Category;
+  return Portfolio;
 };
