@@ -41,3 +41,10 @@ router.post("/user/login",async (req,res) => {
         res.status(400).json(err)
     }
 })
+
+// @post
+// /api/user/logout
+// login user out
+router.post("/user/logout",async (req, res) => {
+    // logout either with token or sessions
+})
