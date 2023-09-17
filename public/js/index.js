@@ -7,7 +7,7 @@ app.use(express.json());
 const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  database: 'financetracker',
+  database: 'finance_tracker',
   password: 'your_mysql_password_here',
 });
 
