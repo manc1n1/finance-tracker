@@ -25,18 +25,16 @@ app.use(session(sess));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", routes)
 
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
 //TODO: Use the Express Router for more detailed routes
-// app.use(routes);
+app.use(routes);
 
 app.get('/', function (req, res) {
 	res.render('home');
 });
-
 
 
 sequelize.sync({ force: false }).then(() => {

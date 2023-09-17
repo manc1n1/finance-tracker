@@ -1,6 +1,14 @@
 const router = require("express").Router();
 const User = require("../../db/models/user")
 
+function setUserSessions(req, userData){
+    // store user information in session
+    req.session.user_id = userData.id
+    req.session.first_name = userData.first_name 
+    req.session.last_name = userData.last_name 
+    req.session.email = userData.email 
+    req.session.logged_in = true
+}
 
 // @post
 // /api/user
@@ -9,6 +17,10 @@ router.post("/user", async (req, res) => {
     try {
         const {first_name, last_name, email, password} = req.body
         const userData = await User.create({first_name, last_name, email, password})
+
+       // store user info in session
+       setUserSessions(req, userData)
+
         res.status(200).json(userData)
     } catch (error) {
         console.log(error)
@@ -34,6 +46,9 @@ router.post("/user/login",async (req,res) => {
             res.status(400).json({message:"Incorrect email or password, please try again"})
         }
 
+         // store user info in session
+       setUserSessions(req, userData)
+
         res.json({user:userData, message:"You are now logged"})
 
     } catch (error) {
@@ -46,7 +61,14 @@ router.post("/user/login",async (req,res) => {
 // /api/user/logout
 // login user out
 router.post("/user/logout",async (req, res) => {
-    // logout either with token or sessions
+    if(req.session.logged_in){
+        req.session.destroy(() => {
+            res.status(204).end();
+        })
+    }else {
+        console.log(err)
+        res.status(404).end()
+    }
 })
 
 // @get
