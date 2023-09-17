@@ -13,7 +13,7 @@ function setUserSessions(req, userData){
 // @post
 // /api/user
 // creating user
-router.post("/user", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const {first_name, last_name, email, password} = req.body
         const userData = await User.create({first_name, last_name, email, password})
@@ -31,7 +31,7 @@ router.post("/user", async (req, res) => {
 // @post
 // /api/user/login
 // login in user
-router.post("/user/login",async (req,res) => {
+router.post("/login",async (req,res) => {
     try {
         const userData = await User.findOne({where:{email:req.body.email}})
 
@@ -60,7 +60,7 @@ router.post("/user/login",async (req,res) => {
 // @post
 // /api/user/logout
 // login user out
-router.post("/user/logout",async (req, res) => {
+router.post("/logout",async (req, res) => {
     if(req.session.logged_in){
         req.session.destroy(() => {
             res.status(204).end();
@@ -72,45 +72,13 @@ router.post("/user/logout",async (req, res) => {
 })
 
 // @get
-// /api/users
+// /api/user/list
 // get all users
-router.get('/users', async (req, res) => {
+router.get('/list', async (req, res) => {
 	try {
 		const users = await User.findAll();
 
 		return res.json(users);
-	} catch (err) {
-		console.log(err);
-		return res.status(500).json({ error: 'Something went wrong.' });
-	}
-});
-
-// @post
-// /api/portfolio
-// create portfolio
-router.post('/portfolio', async (req, res) => {
-	const { name, user_id } = req.body;
-
-	try {
-		const portfolio = await Portfolio.create({
-			name,
-			user_id,
-		});
-		return res.json(portfolio);
-	} catch (err) {
-		console.log(err);
-		return res.status(500).json(err);
-	}
-});
-
-// @get
-// /api/portfolios
-// get all portfolios
-router.get('/portfolios', async (req, res) => {
-	try {
-		const portfolios = await Portfolio.findAll();
-
-		return res.json(portfolios);
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ error: 'Something went wrong.' });
