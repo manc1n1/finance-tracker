@@ -5,10 +5,10 @@ const Portfolio = require("../../db/models/portfolio")
 // /api/portfolio
 // create portfolio
 router.post('/', async (req, res) => {
-	const { name, net_worth } = req.body;
-    const user_id = req.session.user_id
-
-	try {
+    
+    try {
+        const { name, net_worth } = req.body;
+        const user_id = req.session.user_id
 		const portfolio = await Portfolio.create({
 			name,
             net_worth,
