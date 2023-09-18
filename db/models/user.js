@@ -1,5 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
+const bcrypt = require("bcrypt")
+
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		/**
@@ -16,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
 
 		toJSON() {
 			return { ...this.get(), id: undefined };
+		}
+
+		// compare passwords
+		checkPassword(loginPw){
+			return bcrypt.compareSync(loginPw, this.password)
 		}
 	}
 	User.init(
@@ -53,6 +60,16 @@ module.exports = (sequelize, DataTypes) => {
 			},
 		},
 		{
+			hooks:{
+				beforeCreate: async (newUserData) => {
+				  newUserData.password = await bcrypt.hash(newUserData.password, 10)
+				  return newUserData
+				},
+				beforeUpdate:async (updatedUserData) => {
+				  updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10)
+				  return updatedUserData
+				}
+			  },
 			sequelize,
 			timestamps: false,
 			modelName: 'User',
