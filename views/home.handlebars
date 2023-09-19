@@ -1,1 +1,20 @@
-<h1>Homepage</h1>
+<h1 style='color: #bac2de;'>Welcome,
+	<span style='color: #a6e3a1;'>{{user.first_name}}</span></h1>
+
+<section class='display-flex justify-space-around p-5'>
+	<section>
+		<h1 style='color: #f9e2af;'>Net Worth</h1>
+		<h1
+			id='net-worth'
+			style='color: #a6adc8; text-align: center;'
+		>${{portfolio.net_worth}}</h1>
+	</section>
+
+	<section>
+		<h1 style='color: #f9e2af;'>Salary</h>
+		<h1
+			id='salary'
+			style='color: #a6adc8; text-align: center;'
+		>${{salary.value}}</h1>
+	</section>
+</section>
