@@ -24,6 +24,9 @@ module.exports = {
 			value: {
 				type: Sequelize.FLOAT,
 			},
+			total_value: {
+				type: Sequelize.FLOAT,
+			},
 			portfolio_id: {
 				type: Sequelize.INTEGER,
 				references: {
