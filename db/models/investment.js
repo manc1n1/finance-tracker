@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			this.belongsTo(models.Portfolio, { foreignKey: 'portfolio_id' });
+			this.belongsTo(models.User, { foreignKey: 'user_id' });
 		}
 	}
 	Investment.init(
@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				primaryKey: true,
 			},
-			type: {
-				type: DataTypes.ENUM('Stock', 'Cryptocurrency', 'Other'),
-				allowNull: false,
-			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -31,16 +27,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.FLOAT,
 				allowNull: false,
 			},
-			value: {
-				type: DataTypes.FLOAT,
-			},
-			total_value: {
-				type: DataTypes.FLOAT,
-			},
-			portfolio_id: {
+			user_id: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: 'Portfolios',
+					model: 'Users',
 					key: 'id',
 				},
 			},

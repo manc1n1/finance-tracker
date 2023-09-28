@@ -9,10 +9,6 @@ module.exports = {
 				autoIncrement: true,
 				primaryKey: true,
 			},
-			type: {
-				type: Sequelize.ENUM('Stock', 'Cryptocurrency', 'Other'),
-				allowNull: false,
-			},
 			name: {
 				type: Sequelize.STRING,
 				allowNull: false,
@@ -21,16 +17,10 @@ module.exports = {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
-			value: {
-				type: Sequelize.FLOAT,
-			},
-			total_value: {
-				type: Sequelize.FLOAT,
-			},
-			portfolio_id: {
+			user_id: {
 				type: Sequelize.INTEGER,
 				references: {
-					model: 'Portfolios',
+					model: 'Users',
 					key: 'id',
 				},
 			},
