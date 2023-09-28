@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../db/models');
+const { User, Investment } = require('../../db/models');
 
 router.post('/login', async (req, res) => {
 	try {
@@ -61,11 +61,24 @@ router.post('/logout', (req, res) => {
 	}
 });
 
-// router.post('/add_portfolio', (req, res) => {
-// 	if (req.session.logged_in) {
-// 	} else {
-// 		res.status(404).end();
-// 	}
-// });
+router.post('/add', async (req, res) => {
+	if (req.session.logged_in) {
+		const { name, quantity } = req.body;
+
+		try {
+			const investment = await Investment.create({
+				name,
+				quantity,
+				user_id: req.session.user_id,
+			});
+			return res.json(investment);
+		} catch (err) {
+			console.log(err);
+			return res.status(500).json(err);
+		}
+	} else {
+		res.status(404).end();
+	}
+});
 
 module.exports = router;
