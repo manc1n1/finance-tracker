@@ -30,169 +30,17 @@
 			</a>
 			{{#if logged_in}}
 				<nav>
-					<button
-						class='btn btn-info'
-						data-bs-toggle='modal'
-						data-bs-target='#addPortfolioModal'
-						id='addPortfolio'
-					>Add Portfolio</button>
-					<button class='btn btn-danger' id='logout'>Logout</button>
+					<button class='btn btn-info' id='add-btn'>
+						Add Investment
+					</button>
+					<button class='btn btn-danger' id='logout'>
+						Logout
+					</button>
 				</nav>
 			{{/if}}
 		</header>
 		<main class='container container-fluid mt-5'>
 			{{{body}}}
-			{{#if logged_in}}
-			<div
-				class='modal fade'
-				id='addPortfolioModal'
-				tabindex='-1'
-				aria-labelledby='exampleModalLabel'
-				aria-hidden='true'
-			>
-				<div class='modal-dialog'>
-					<div
-						class='modal-content'
-						style='background-color: #313244'
-					>
-						<div
-							class='modal-header'
-							style='color: #cdd6f4; background-color: #1e1e2e;'
-						>
-							<h1 class='modal-title' id='modalTitle'>Add
-								Portfolio</h1>
-							<button
-								type='button'
-								class='btn-close'
-								data-bs-dismiss='modal'
-								aria-label='Close'
-								style='background-color: #f38ba8'
-							></button>
-						</div>
-						<div class='modal-body'>
-							<form class='form portfolio-form'>
-								<div class='form-group'>
-									<label
-										for='name-portfolio'
-										style='color: #a6adc8;'
-									>Portfolio Name:</label>
-									<input
-										class='form-input'
-										type='text'
-										id='name-portfolio'
-									/>
-								</div>
-								<div class='form-group'>
-									<label
-										for='salary-portfolio'
-										style='color: #a6adc8;'
-									>Salary:</label>
-									<input
-										class='form-input'
-										type='number'
-										step='0.01'
-										id='salary-portfolio'
-									/>
-								</div>
-								<div class='form-group'>
-									<h3 style='color: #bac2de;'>Add an
-										Investment</h3>
-									<select
-										class='form-select'
-										id='investmentSelect'
-										aria-label='Investment type'
-									>
-										<option selected>Choose Investment Type</option>
-										<option value='Stock'>Stock</option>
-										<option
-											value='Cryptocurrency'
-										>Cryptocurrency</option>
-										<option value='Other'>Other</option>
-									</select>
-								</div>
-								<div id='check' class='Stock option'>
-									<div class='form-group'>
-										<label
-											for='stock-name-investment'
-											style='color: #a6adc8;'
-										>Stock Symbol:</label>
-										<input
-											class='form-input'
-											type='text'
-											id='stock-name-investment'
-										/>
-									</div>
-									<div class='form-group'>
-										<label
-											for='stock-quantity-investment'
-											style='color: #a6adc8;'
-										>Stock Quantity:</label>
-										<input
-											class='form-input'
-											type='number'
-											step='0.01'
-											id='stock-quantity-investment'
-										/>
-									</div>
-									<button
-										type='submit'
-										class='btn btn-info'
-										id='btn-save-stock'
-									>Save</button>
-								</div>
-								<div
-									id='check'
-									class='Cryptocurrency option'
-								></div>
-								<div id='check' class='Other option'>
-									<div class='form-group'>
-										<label
-											for='name-investment'
-											style='color: #a6adc8;'
-										>Investment Name:</label>
-										<input
-											class='form-input'
-											type='text'
-											id='name-investment'
-										/>
-									</div>
-									<div class='form-group'>
-										<label
-											for='other-quantity-investment'
-											style='color: #a6adc8;'
-										>Investment Quantity:</label>
-										<input
-											class='form-input'
-											type='number'
-											step='0.01'
-											id='other-quantity-investment'
-										/>
-									</div>
-									<div class='form-group'>
-										<label
-											for='other-value-investment'
-											style='color: #a6adc8;'
-										>Investment Value:</label>
-										<input
-											class='form-input'
-											type='number'
-											step='0.01'
-											id='other-value-investment'
-										/>
-									</div>
-									<button
-										type='submit'
-										class='btn btn-info'
-										id='btn-save-other'
-									>Save</button>
-								</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			{{/if}}
 		</main>
 		<footer>
 		</footer>
@@ -203,13 +51,7 @@
 		></script>
 		{{#if logged_in}}
 			<script src='/js/logout.js'></script>
-			<script src='/js/addPortfolio.js'></script>
-			<script>$(document).ready(function() { $("select").change(function()
-				{ $(this).find("option:selected").each(function() { var
-				optionValue = $(this).attr("value"); if (optionValue) {
-				$(".option").not("." + optionValue).hide(); $("." +
-				optionValue).show(); } else { $(".option").hide(); } });
-				}).change(); });</script>
+			<script src='/js/addbtn.js'></script>
 		{{/if}}
 	</body>
 </html>
