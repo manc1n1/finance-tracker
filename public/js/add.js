@@ -11,10 +11,10 @@ const add = async (event) => {
 			headers: { 'Content-Type': 'application/json' },
 		});
 
-		if (response.ok) {
+		if (response.status === 200) {
 			document.location.replace('/');
 		} else {
-			alert('Failed to add investment');
+			alert('Invalid stock ticker symbol');
 		}
 	}
 };

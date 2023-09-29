@@ -21,13 +21,17 @@ router.get('/', withAuth, async (req, res) => {
 		// );
 
 		function fetchSymbol(symbol) {
-			return fetch(
-				`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${process.env.API_KEY}`,
-				{
-					method: 'GET',
-					headers: { 'Content-Type': 'application/json' },
-				},
-			).then((res) => res.json());
+			try {
+				return fetch(
+					`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${process.env.API_KEY}`,
+					{
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					},
+				).then((res) => res.json());
+			} catch (err) {
+				res.status(400).json(err);
+			}
 		}
 
 		var investmentsArr = [];
