@@ -38,16 +38,22 @@ router.get('/', withAuth, async (req, res) => {
 		for (let i = 0; i < investmentData.length; i++) {
 			await fetchSymbol(investmentData[i].name).then((result) => {
 				// console.log(result);
-				var dailyData = result[Object.keys(result)[1]];
-				var recentDay = dailyData[Object.keys(dailyData)[0]];
-				var closePrice = recentDay[Object.keys(recentDay)[3]];
+				if (
+					result[Object.keys(result)[0]] ===
+					'Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.'
+				) {
+				} else {
+					var dailyData = result[Object.keys(result)[1]];
+					var recentDay = dailyData[Object.keys(dailyData)[0]];
+					var closePrice = recentDay[Object.keys(recentDay)[3]];
 
-				investmentsArr.push({
-					name: investmentData[i].name,
-					value:
-						parseFloat(closePrice) *
-						parseFloat(investmentData[i].quantity),
-				});
+					investmentsArr.push({
+						name: investmentData[i].name,
+						value:
+							parseFloat(closePrice) *
+							parseFloat(investmentData[i].quantity),
+					});
+				}
 			});
 		}
 
